@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="filterItems()">
+    <ion-segment-button value="all">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="movies">
+      <ion-label>Movies</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="series">
+      <ion-label>Series</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="filterItems()" placeholder="Search"></ion-searchbar>
+
+  <ion-select [(ngModel)]="sortOption" (ionChange)="sortItems()">
+    <ion-select-option value="year">Sort by Year</ion-select-option>
+    <ion-select-option value="title">Sort by Title</ion-select-option>
+    <ion-select-option value="rating">Sort by Rating</ion-select-option>
+  </ion-select>
+
+  <ion-list *ngIf="selectedSegment === 'all' || selectedSegment === 'movies'">
+    <ion-item *ngFor="let movie of filteredMovies" (click)="viewDetails(movie)">
+      <ion-label>{{ movie.Title }}</ion-label>
+      <ion-note slot="end">{{ movie.Year }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="selectedSegment === 'all' || selectedSegment === 'series'">
+    <ion-item *ngFor="let series of filteredSeries" (click)="viewDetails(series)">
+      <ion-label>{{ series.Title }}</ion-label>
+      <ion-note slot="end">{{ series.Year }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
