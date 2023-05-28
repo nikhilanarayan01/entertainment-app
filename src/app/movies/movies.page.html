@@ -29,9 +29,6 @@
     <ion-item *ngFor="let movie of filteredMovies" (click)="viewDetails(movie)">
       <ion-label>{{ movie.Title }}</ion-label>
       <ion-note slot="end">{{ movie.Year }}</ion-note>
-      <div class="star-container">
-        <ion-icon *ngFor="let _ of getStars(movie.imdbRating)" name="star"></ion-icon>
-      </div>
     </ion-item>
   </ion-list>
 

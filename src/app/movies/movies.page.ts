@@ -20,10 +20,7 @@ export class MoviesPage implements OnInit {
   ngOnInit() {
     this.fetchData();
   }
-  getStars(rating: number): number[] {
-    const starsCount = Math.floor(rating);
-    return Array(starsCount).fill(0);
-  }
+
   fetchData() {
     axios
       .get('http://www.omdbapi.com/?s=avengers&apikey=90b41d0f')
