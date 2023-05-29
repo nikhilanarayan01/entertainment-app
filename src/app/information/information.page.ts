@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import axios from 'axios';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-information',
@@ -11,7 +13,7 @@ export class InformationPage implements OnInit {
   imdbID: string | null;
   item: any;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,private router: Router,private navCtrl: NavController) {
     this.imdbID = null;
   }
 
@@ -22,6 +24,10 @@ export class InformationPage implements OnInit {
     }
   }
 
+
+  goBack() {
+    this.navCtrl.navigateBack('/movies');
+  }
   fetchDetails() {
     axios
       .get(`http://www.omdbapi.com/?i=${this.imdbID}&apikey=90b41d0f`)
@@ -32,4 +38,5 @@ export class InformationPage implements OnInit {
         console.error('Error fetching details:', error);
       });
   }
+
 }

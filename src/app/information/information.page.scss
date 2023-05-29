@@ -1,0 +1,8 @@
+ion-content {
+  --ion-content-background: transparent; // Set the background color of the content to transparent
+
+  .scroll-content {
+    // Set the content to occupy the entire available height
+    height: 100vh;
+  }
+}

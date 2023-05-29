@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
 import { MoviesPageRoutingModule } from './movies-routing.module';
 
 import { MoviesPage } from './movies.page';
@@ -15,7 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     IonicModule,
     MoviesPageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+
+
   ],
   declarations: [MoviesPage]
 })

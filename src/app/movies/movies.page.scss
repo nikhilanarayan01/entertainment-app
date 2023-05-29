@@ -1,0 +1,34 @@
+ion-toggle {
+  --background-checked: #3880ff;
+  --background-unchecked: #f4f5f8;
+  --handle-background-checked: #ffffff;
+  --handle-background-unchecked: #ffffff;
+  --handle-shadow: none;
+  --transition-duration: 250ms;
+}
+.dropdown-inner {
+  display: flex;
+  align-items: center;
+
+  ion-select {
+
+    width: 70%;
+    text-align: left;
+  }
+}
+.card {
+  padding-bottom: 20px;
+  padding-top: 10px;
+  margin-left: 0px;
+  margin-right: 20px;
+  box-shadow: none;
+  border-radius: 5px;
+  max-height: 200vh;
+  margin-bottom: 10px;
+  margin-top: 0;
+  overflow-x: overlay;
+}
+ion-item:hover ion-label {
+  color: #49cdcb;
+}
+

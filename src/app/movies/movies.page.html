@@ -1,6 +1,7 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Movies</ion-title>
+  <ion-toolbar style="text-align: center;">
+    <ion-title>Entertainment</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -17,25 +18,46 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="filterItems()" placeholder="Search"></ion-searchbar>
 
-  <ion-select [(ngModel)]="sortOption" (ionChange)="sortItems()">
-    <ion-select-option value="year">Sort by Year</ion-select-option>
-    <ion-select-option value="title">Sort by Title</ion-select-option>
-    <ion-select-option value="rating">Sort by Rating</ion-select-option>
-  </ion-select>
+  <ion-item lines="none">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="7">
+          <ion-row>
+            <ion-col size="7">
+              <div class="dropdown-inner">
 
+                <ion-select  [(ngModel)]="sortOption" (ionChange)="sortItems()">
+                  <ion-select-option value="year">Sort by Year</ion-select-option>
+                  <ion-select-option value="title">Sort by Title</ion-select-option>
+                  <ion-select-option value="rating">Sort by Rating</ion-select-option>
+                </ion-select>
+
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col size="5">
+          <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="filterItems()" placeholder="Search"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+<ion-card>
   <ion-list *ngIf="selectedSegment === 'all' || selectedSegment === 'movies'">
-    <ion-item *ngFor="let movie of filteredMovies" (click)="viewDetails(movie)">
-      <ion-label>{{ movie.Title }}</ion-label>
+    <ion-item style="margin-right:20px" *ngFor="let movie of filteredMovies" (click)="viewDetails(movie)">
+      <ion-label >{{ movie.Title }}</ion-label>
       <ion-note slot="end">{{ movie.Year }}</ion-note>
     </ion-item>
-  </ion-list>
+  </ion-list></ion-card>
 
+  <ion-card>
   <ion-list *ngIf="selectedSegment === 'all' || selectedSegment === 'series'">
-    <ion-item *ngFor="let series of filteredSeries" (click)="viewDetails(series)">
+    <ion-item style="margin-right:20px" *ngFor="let series of filteredSeries" (click)="viewDetails(series)">
       <ion-label>{{ series.Title }}</ion-label>
       <ion-note slot="end">{{ series.Year }}</ion-note>
     </ion-item>
-  </ion-list>
+  </ion-list></ion-card>
 </ion-content>

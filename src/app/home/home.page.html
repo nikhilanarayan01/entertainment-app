@@ -1,20 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      OMDB
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <div class="page-content">
+    <div class="background-image">
+      <!-- Rest of your page content here -->
+      <ion-header collapse="condense">
+        <ion-toolbar style="text-align: center;">
+          <ion-title size="large">Entertainment</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-button [routerLink]="['/movies']" routerLinkActive="router-link-active">Click to explore
-
-</ion-button>
-
+      <ion-button [routerLink]="['/movies']" routerLinkActive="router-link-active" color="primary">
+        Click to explore
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
+

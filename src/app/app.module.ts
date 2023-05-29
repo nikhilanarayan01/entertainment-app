@@ -5,10 +5,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { MoviesPage } from './movies/movies.page';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { InformationPageModule } from './information/information.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,InformationPageModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

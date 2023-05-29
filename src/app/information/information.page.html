@@ -1,14 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/movies"></ion-back-button>
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
+
+
+
+<ion-content fullscreen >
+  <ion-card *ngIf="item">
     <ion-card-header>
       <ion-card-title>{{ item.Title }}</ion-card-title>
     </ion-card-header>
