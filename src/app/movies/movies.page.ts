@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { ModalController } from '@ionic/angular';
@@ -15,11 +15,13 @@ export class MoviesPage implements OnInit {
   selectedSegment: string = 'all';
   searchQuery: string = '';
   sortOption: string = 'year';
-  darkMode = false;
-
   isDarkTheme: boolean = false;
 
-  constructor(private router: Router,  private modalCtrl: ModalController) {}
+  constructor(
+    private router: Router,
+    private modalCtrl: ModalController,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     this.fetchData();
@@ -40,34 +42,30 @@ export class MoviesPage implements OnInit {
         console.error('Error fetching data:', error);
       });
   }
- // toggleTheme(event: any) {
-   // const isChecked = event.detail.checked;
-  //  this.themeService.setTheme(isChecked ? 'dark' : 'light');
- // }
- filterItems() {
-  if (this.selectedSegment === 'all') {
-    this.filteredMovies = this.moviesAndSeries.filter((item) =>
-      item.Title.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-    this.filteredSeries = this.filteredMovies.filter((item) => item.Type === 'series');
-  } else if (this.selectedSegment === 'movies') {
-    this.filteredMovies = this.moviesAndSeries.filter(
-      (item) =>
-        item.Type === 'movie' &&
-        item.Title.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-    this.filteredSeries = [];
-  } else if (this.selectedSegment === 'series') {
-    this.filteredMovies = [];
-    this.filteredSeries = this.moviesAndSeries.filter(
-      (item) =>
-        item.Type === 'series' &&
-        item.Title.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-  }
-  this.sortItems();
-}
 
+  filterItems() {
+    if (this.selectedSegment === 'all') {
+      this.filteredMovies = this.moviesAndSeries.filter((item) =>
+        item.Title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+      this.filteredSeries = this.filteredMovies.filter((item) => item.Type === 'series');
+    } else if (this.selectedSegment === 'movies') {
+      this.filteredMovies = this.moviesAndSeries.filter(
+        (item) =>
+          item.Type === 'movie' &&
+          item.Title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+      this.filteredSeries = [];
+    } else if (this.selectedSegment === 'series') {
+      this.filteredMovies = [];
+      this.filteredSeries = this.moviesAndSeries.filter(
+        (item) =>
+          item.Type === 'series' &&
+          item.Title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+    this.sortItems();
+  }
 
   sortItems() {
     if (this.sortOption === 'year') {
@@ -84,5 +82,17 @@ export class MoviesPage implements OnInit {
 
   viewDetails(item: any) {
     this.router.navigate(['/information', item.imdbID]);
+  }
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+
+    // Additional logic for toggling dark/light theme
+    const bodyElement = document.getElementsByTagName('body')[0];
+    if (this.isDarkTheme) {
+      this.renderer.addClass(bodyElement, 'dark-theme');
+    } else {
+      this.renderer.removeClass(bodyElement, 'dark-theme');
+    }
   }
 }

@@ -1,7 +1,13 @@
-<ion-header>
-  <ion-toolbar style="text-align: center;">
-    <ion-title>Entertainment</ion-title>
 
+<ion-header translucent>
+  <ion-toolbar style="text-align: center;">
+
+    <ion-title>Entertainment</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleTheme()">
+        <ion-icon slot="icon-only" [name]="isDarkTheme ? 'sunny' : 'moon'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
