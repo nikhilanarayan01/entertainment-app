@@ -1,14 +1,15 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit,Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
-import { ModalController } from '@ionic/angular';
+import { IonContent } from '@ionic/angular';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.page.html',
   styleUrls: ['./movies.page.scss'],
 })
-export class MoviesPage implements OnInit {
+export class MoviesPage implements OnInit, AfterViewInit {
   moviesAndSeries: any[] = [];
   filteredMovies: any[] = [];
   filteredSeries: any[] = [];
@@ -17,14 +18,19 @@ export class MoviesPage implements OnInit {
   sortOption: string = 'year';
   isDarkTheme: boolean = false;
 
+  @ViewChild(IonContent, { static: false }) content!: IonContent;
+
   constructor(
-    private router: Router,
-    private modalCtrl: ModalController,
-    private renderer: Renderer2
+    public themeService: ThemeService,
+    private router: Router,  private renderer: Renderer2
   ) {}
 
   ngOnInit() {
     this.fetchData();
+  }
+
+  ngAfterViewInit() {
+    this.scrollToTop(); // Scroll to top after view initialization
   }
 
   fetchData() {
@@ -41,6 +47,10 @@ export class MoviesPage implements OnInit {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop();
   }
 
   filterItems() {
@@ -86,13 +96,14 @@ export class MoviesPage implements OnInit {
 
   toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
+    this.themeService.toggleTheme();
 
-    // Additional logic for toggling dark/light theme
-    const bodyElement = document.getElementsByTagName('body')[0];
     if (this.isDarkTheme) {
-      this.renderer.addClass(bodyElement, 'dark-theme');
+      this.renderer.addClass(document.body, 'dark-theme');
+      this.renderer.removeClass(document.body, 'light-theme');
     } else {
-      this.renderer.removeClass(bodyElement, 'dark-theme');
+      this.renderer.addClass(document.body, 'light-theme');
+      this.renderer.removeClass(document.body, 'dark-theme');
     }
   }
 }

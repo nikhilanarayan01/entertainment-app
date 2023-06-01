@@ -1,17 +1,17 @@
 
-<ion-header translucent>
-  <ion-toolbar style="text-align: center;">
-
+<ion-header [class.dark-theme]="isDarkTheme" [class.light-theme]="!isDarkTheme" translucent>
+    <ion-toolbar style="text-align: center;">
     <ion-title>Entertainment</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleTheme()">
-        <ion-icon slot="icon-only" [name]="isDarkTheme ? 'sunny' : 'moon'"></ion-icon>
+        <ion-icon slot="icon-only" [name]="(themeService.isDarkTheme$ | async) ? 'sunny' : 'moon'"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+<ion-content  [class.dark-theme]="isDarkTheme" [class.light-theme]="!isDarkTheme"  >
   <ion-segment [(ngModel)]="selectedSegment" (ionChange)="filterItems()">
     <ion-segment-button value="all">
       <ion-label>All</ion-label>
@@ -67,3 +67,4 @@
     </ion-item>
   </ion-list></ion-card>
 </ion-content>
+
